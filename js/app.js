@@ -1,9 +1,13 @@
-// SEWAAJA - APP.JS (LENGKAP & FIX)
+// ============================================================
+// SEWAAJA - APP.JS
 // ============================================================
 
 // ==================== SUPABASE CONFIG ====================
+// 🔴 GANTI DENGAN CREDENTIALS SUPABASE ANDA 🔴
 const SUPABASE_URL = 'https://ltitsmpdizbomyprofsh.supabase.co/rest/v1/';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0aXRzbXBkaXpib215cHJvZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4Mzk0MTAsImV4cCI6MjA5NjQxNTQxMH0.QOuA9xW9AMtYbYwg895taraq2a1O0qNyWghepyDZuwk';
+
+// DEKLARASI supabase - HANYA SEKALI!
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 console.log('✅ Supabase connected!');
 
@@ -48,7 +52,6 @@ function saveToStorageLocal() {
 
 async function loadFromStorage() {
     try {
-        // Coba dari Supabase
         const { data: productsData, error: productsError } = await supabase
             .from('products')
             .select('*')
@@ -60,7 +63,6 @@ async function loadFromStorage() {
             products = productsData;
             console.log('✅ Products loaded from Supabase:', products.length);
         } else {
-            // Jika kosong, pakai default
             products = JSON.parse(JSON.stringify(defaultProducts));
             console.log('📦 Using default products');
         }
@@ -76,7 +78,6 @@ async function loadFromStorage() {
         
     } catch(e) {
         console.error('❌ Supabase error:', e);
-        // Fallback ke LocalStorage
         loadFromStorageLocal();
     }
 }
@@ -99,49 +100,6 @@ function loadFromStorageLocal() {
     } catch(e) {
         products = JSON.parse(JSON.stringify(defaultProducts));
         rentals = [];
-    }
-}
-
-async function saveToStorage() {
-    try {
-        // Simpan ke Supabase
-        for (const product of products) {
-            const { error } = await supabase
-                .from('products')
-                .upsert({
-                    id: product.id,
-                    name: product.name,
-                    category: product.category,
-                    price: product.price,
-                    status: product.status,
-                    image_url: product.image || product.image_url
-                }, { onConflict: 'id' });
-            if (error) console.error('Upsert product error:', error);
-        }
-        for (const rental of rentals) {
-            const { error } = await supabase
-                .from('rentals')
-                .upsert({
-                    id: rental.id,
-                    product_id: rental.product_id,
-                    product_name: rental.product_name,
-                    penyewa: rental.penyewa,
-                    user_email: rental.user_email,
-                    no_wa: rental.no_wa,
-                    alamat: rental.alamat,
-                    tgl_mulai: rental.tgl_mulai,
-                    tgl_selesai: rental.tgl_selesai,
-                    total_harga: rental.total_harga,
-                    metode: rental.metode || 'qris',
-                    status: rental.status,
-                    tanggal_pengajuan: rental.tanggal_pengajuan || new Date().toISOString()
-                }, { onConflict: 'id' });
-            if (error) console.error('Upsert rental error:', error);
-        }
-        console.log('💾 Saved to Supabase');
-    } catch(e) {
-        console.error('❌ Save to Supabase error:', e);
-        saveToStorageLocal();
     }
 }
 
@@ -248,7 +206,6 @@ document.getElementById('searchInput')?.addEventListener('input', function() {
     renderCatalog();
 });
 
-// ==================== ADMIN TABLE ====================
 function renderAdminTable() {
     const tbody = document.getElementById('adminTable');
     if (!tbody) return;
@@ -268,7 +225,6 @@ function renderAdminTable() {
     });
 }
 
-// ==================== RENTAL TABLE ====================
 function renderRentalTable() {
     const tbody = document.getElementById('rentalTable');
     if (!tbody) return;
@@ -319,7 +275,6 @@ function renderRentalTable() {
     });
 }
 
-// ==================== CRUD PRODUK ====================
 function editProduct(id) {
     const p = products.find(p => p.id === id);
     if (!p) return;
@@ -376,7 +331,6 @@ async function simpanProduk() {
     await renderAll();
 }
 
-// ==================== FUNGSI SEWA ====================
 function openSewa(productId) {
     if (!currentUser) {
         showToast('⚠️ Silakan login dulu!', 'error');
@@ -434,7 +388,7 @@ async function simpanSewa() {
     const metode = document.getElementById('sewaMetode').value;
     
     if (!nama || !wa || !alamat || !tglMulai || !tglSelesai) {
-        return showToast('⚠️ Isi semua data!', 'error');
+        return showToast('⚠️ Isi semua数据!', 'error');
     }
     
     const product = products.find(p => p.id === productId);
@@ -479,7 +433,6 @@ async function simpanSewa() {
     await renderAll();
 }
 
-// ==================== QR CODE ====================
 function generateQRCode(amount, rentalId) {
     currentPaymentRentalId = rentalId;
     buktiTerkirim = false;
@@ -509,7 +462,6 @@ function generateQRCode(amount, rentalId) {
     openModal('paymentModal');
 }
 
-// ==================== WHATSAPP ====================
 function kirimKeWA() {
     const rental = rentals.find(r => r.id === currentPaymentRentalId);
     if (!rental) {
@@ -562,7 +514,6 @@ function selesaikanPembayaran() {
     }
 }
 
-// ==================== ADMIN SEWA ====================
 async function approveRental(id) {
     const rental = rentals.find(r => r.id === id);
     if (rental) {
@@ -608,7 +559,6 @@ function confirmPaymentFromAdmin(id) {
     }
 }
 
-// ==================== AUTH ====================
 function handleLogin() {
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
@@ -646,7 +596,6 @@ function toggleAuthMode() {
     document.getElementById('authSwitch').innerText = isLoginMode ? 'Belum punya akun? Daftar' : 'Sudah punya akun? Login';
 }
 
-// ==================== PILIH METODE ====================
 function pilihMetode(metode) {
     metodePembayaran = metode;
     document.getElementById('sewaMetode').value = metode;
@@ -661,11 +610,9 @@ function pilihMetode(metode) {
     }
 }
 
-// ==================== MODAL ====================
 function openModal(id) { document.getElementById(id).style.display = 'flex'; }
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-// ==================== INIT ====================
 loadFromStorage();
 renderAll();
 console.log('🏔️ SewaAja - Sewa Alat Pendakian siap digunakan!');
