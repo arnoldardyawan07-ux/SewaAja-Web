@@ -4,7 +4,7 @@
 
 // ==================== SUPABASE CONFIG ====================
 // 🔴 GANTI DENGAN CREDENTIALS SUPABASE ANDA 🔴
-const SUPABASE_URL = 'https://ltitsmpdizbomyprofsh.supabase.co/rest/v1/';
+const SUPABASE_URL = 'https://ltitsmpdizbomyprofsh.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0aXRzbXBkaXpib215cHJvZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4Mzk0MTAsImV4cCI6MjA5NjQxNTQxMH0.QOuA9xW9AMtYbYwg895taraq2a1O0qNyWghepyDZuwk';
 
 // DEKLARASI supabase - HANYA SEKALI!
