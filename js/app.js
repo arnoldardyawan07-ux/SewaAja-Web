@@ -1,11 +1,11 @@
 // ============================================================
-// SEWAAJA - APP.JS
+// SEWAAJA - APP.JS (FIX - HANYA 1 DEKLARASI supabase)
 // ============================================================
 
 // ==================== SUPABASE CONFIG ====================
-// 🔴 GANTI DENGAN CREDENTIALS SUPABASE ANDA 🔴
+// 🔴 GANTI DENGAN CREDENTIALS DARI DASHBOARD SUPABASE ANDA 🔴
 const SUPABASE_URL = 'https://ltitsmpdizbomyprofsh.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0aXRzbXBkaXpib215cHJvZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4Mzk0MTAsImV4cCI6MjA5NjQxNTQxMH0.QOuA9xW9AMtYbYwg895taraq2a1O0qNyWghepyDZuwk';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0aXRzbXBkaXpib215cHJvZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTk3MjU2ODAsImV4cCI6MjAzNTMwMTY4MH0.7dV-D1qF1S9i0nFuPzLq8FwVfJ0Mji3tU5NtS0QpDm4';
 
 // DEKLARASI supabase - HANYA SEKALI!
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -57,7 +57,10 @@ async function loadFromStorage() {
             .select('*')
             .order('id', { ascending: true });
         
-        if (productsError) throw productsError;
+        if (productsError) {
+            console.error('Products error:', productsError);
+            throw productsError;
+        }
         
         if (productsData && productsData.length > 0) {
             products = productsData;
@@ -72,7 +75,10 @@ async function loadFromStorage() {
             .select('*')
             .order('id', { ascending: false });
         
-        if (rentalsError) throw rentalsError;
+        if (rentalsError) {
+            console.error('Rentals error:', rentalsError);
+            throw rentalsError;
+        }
         rentals = rentalsData || [];
         console.log('✅ Rentals loaded from Supabase:', rentals.length);
         
@@ -388,7 +394,7 @@ async function simpanSewa() {
     const metode = document.getElementById('sewaMetode').value;
     
     if (!nama || !wa || !alamat || !tglMulai || !tglSelesai) {
-        return showToast('⚠️ Isi semua数据!', 'error');
+        return showToast('⚠️ Isi semua data!', 'error');
     }
     
     const product = products.find(p => p.id === productId);
@@ -613,6 +619,7 @@ function pilihMetode(metode) {
 function openModal(id) { document.getElementById(id).style.display = 'flex'; }
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
+// ==================== INIT ====================
 loadFromStorage();
 renderAll();
 console.log('🏔️ SewaAja - Sewa Alat Pendakian siap digunakan!');
