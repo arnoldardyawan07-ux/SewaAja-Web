@@ -1,24 +1,22 @@
 // ============================================================
-// SEWAAJA - APP.JS (FIX - HANYA 1 DEKLARASI supabase)
+// SEWAAJA - APP.JS (FIX - TIDAK ADA DUPLIKASI)
 // ============================================================
 
 // ==================== SUPABASE CONFIG ====================
-// 🔴 GANTI DENGAN CREDENTIALS DARI DASHBOARD SUPABASE ANDA 🔴
 const SUPABASE_URL = 'https://ltitsmpdizbomyprofsh.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0aXRzbXBkaXpib215cHJvZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTk3MjU2ODAsImV4cCI6MjAzNTMwMTY4MH0.7dV-D1qF1S9i0nFuPzLq8FwVfJ0Mji3tU5NtS0QpDm4';
 
-// DEKLARASI supabase - HANYA SEKALI!
+// HANYA SATU DEKLARASI!
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 console.log('✅ Supabase connected!');
 
 // ==================== DATA PRODUK DEFAULT ====================
 const defaultProducts = [
-    { id: 1, name: "Carrier Eiger 60L", category: "Carrier", price: 30000, status: "Tersedia", image: "https://picsum.photos/seed/eiger/300/200" },
-    { id: 2, name: "Carrier Consina 50L", category: "Carrier", price: 45000, status: "Tersedia", image: "https://picsum.photos/seed/consina/300/200" },
-    { id: 3, name: "Tenda Dome 4 Orang", category: "Tenda", price: 50000, status: "Tersedia", image: "https://picsum.photos/seed/tenda1/300/200" },
-    { id: 4, name: "Tenda Eiger Twin", category: "Tenda", price: 75000, status: "Tersedia", image: "https://picsum.photos/seed/tenda2/300/200" },
-    { id: 5, name: "Carrier Arei 40L", category: "Carrier", price: 40000, status: "Tersedia", image: "https://picsum.photos/seed/arei/300/200" },
-    { id: 6, name: "Alat Camping Lengkap", category: "Alat Camping", price: 100000, status: "Tersedia", image: "https://picsum.photos/seed/camping/300/200" }
+    { id: 1, name: "Carrier Eiger 60L", category: "Carrier", price: 30000, status: "Tersedia", image: "Carrier Eiger 60L.jpg" },
+    { id: 2, name: "Carrier Consina 50L", category: "Carrier", price: 45000, status: "Tersedia", image: "Carrier Consina 50L.jpg" },
+    { id: 3, name: "Tenda Dome 4 Orang", category: "Tenda", price: 50000, status: "Tersedia", image: "Tenda Dome 4 Orang.jpg" },
+    { id: 4, name: "Tenda Eiger Twin", category: "Tenda", price: 75000, status: "Tersedia", image: "Tenda Eiger Twin.jpg" },
+    { id: 5, name: "Carrier Arei 40L", category: "Carrier", price: 40000, status: "Tersedia", image: "Carrier Arei 40L.jpg" },
 ];
 
 let products = [];
@@ -58,7 +56,7 @@ async function loadFromStorage() {
             .order('id', { ascending: true });
         
         if (productsError) {
-            console.error('Products error:', productsError);
+            console.error('❌ Products error:', productsError);
             throw productsError;
         }
         
@@ -76,7 +74,7 @@ async function loadFromStorage() {
             .order('id', { ascending: false });
         
         if (rentalsError) {
-            console.error('Rentals error:', rentalsError);
+            console.error('❌ Rentals error:', rentalsError);
             throw rentalsError;
         }
         rentals = rentalsData || [];
