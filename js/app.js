@@ -5,7 +5,7 @@
 // ==================== SUPABASE CONFIG ====================
 // 🔴 GANTI DENGAN CREDENTIALS SUPABASE ANDA 🔴
 const SUPABASE_URL = 'https://ltitsmpdizbomyprofsh.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0aXRzbXBkaXpib215cHJvZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTk3MjU2ODAsImV4cCI6MjAzNTMwMTY4MH0.7dV-D1qF1S9i0nFuPzLq8FwVfJ0Mji3tU5NtS0QpDm4';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0aXRzbXBkaXpib215cHJvZnNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4Mzk0MTAsImV4cCI6MjA5NjQxNTQxMH0.QOuA9xW9AMtYbYwg895taraq2a1O0qNyWghepyDZuwk';
 
 // HANYA SATU DEKLARASI - NAMA VARIABEL HARUS `supabase`
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
