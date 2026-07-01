@@ -1,5 +1,5 @@
 // ============================================================
-// SEWAAJA - APP.JS (FIX - TIDAK ADA DUPLIKASI)
+// SEWAAJA - APP.JS
 // ============================================================
 
 // ==================== SUPABASE CONFIG ====================
@@ -18,6 +18,7 @@ const defaultProducts = [
     { id: 4, name: "Tenda Eiger Twin", category: "Tenda", price: 75000, status: "Tersedia", image: "Tenda Eiger Twin.jpg" },
     { id: 5, name: "Carrier Arei 40L", category: "Carrier", price: 40000, status: "Tersedia", image: "Carrier Arei 40L.jpg" },
 ];
+
 
 let products = [];
 let rentals = [];
