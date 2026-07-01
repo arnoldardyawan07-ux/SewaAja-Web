@@ -472,7 +472,7 @@ function kirimKeWA() {
 }
 
 function kirimPesanWA(rental) {
-    const adminWA = '6281234567890';
+    const adminWA = '6285870408523';
     let pesan = rental.metode === 'qris' ? 
         `✅ KONFIRMASI PEMBAYARAN QRIS ✅\n\n🧑‍🤝‍🧑 Nama: ${rental.penyewa}\n📦 Barang: ${rental.product_name}\n📅 Tanggal: ${rental.tgl_mulai} s/d ${rental.tgl_selesai}\n💰 Total: Rp ${rental.total_harga.toLocaleString()}\n📱 No. WA: ${rental.no_wa}\n📍 Alamat: ${rental.alamat}\n\n📎 *Bukti pembayaran terlampir*` :
         `🏪 KONFIRMASI BAYAR DI TEMPAT 🏪\n\n🧑‍🤝‍🧑 Nama: ${rental.penyewa}\n📦 Barang: ${rental.product_name}\n📅 Tanggal: ${rental.tgl_mulai} s/d ${rental.tgl_selesai}\n💰 Total: Rp ${rental.total_harga.toLocaleString()}\n📱 No. WA: ${rental.no_wa}\n📍 Alamat: ${rental.alamat}\n\nSaya akan bayar langsung di tempat.`;
